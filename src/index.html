@@ -1,83 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
- 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
     <title>Website Temporarily Unavailable</title>
 </head>
 <style>
+:root {
+  --main-color: #cedbec;
+  --stroke-color: black;
+  
+}
+/**/
 body {
-    font-family: Arial, sans-serif;
-    text-align: left;
-    background-image: url('bg.png');
-    background-size: cover; /* Adjust as needed */
-    background-repeat: no-repeat;
-    background-position: fit;
-    background-color: #F0F0F0;
-    margin: 0;
-    padding: 0;
+  background: var(--main-color);
 }
- 
- 
-.unavailable-message {
-    padding: 100px;
- 
-    border-radius: 10px;
- 
-}
- 
 h1 {
     font-size: 52px;
     margin-bottom: 30px;
     color: #3A579F; /* Dark Blue */
+    text-align: center;
 }
- 
-p {
-    font-size: 18px;
+h2 {
+    font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 30px;
-    color: #3A579F; /* Dark Blue */
+    text-align: center;
 }
- 
-a {
-    color: #007bff;
-    font-weight: bold;
-    text-decoration: underline;
+h1, h2 {
+  -webkit-transition: opacity 0.5s linear, margin-top 0.5s linear; /* Safari */
+  transition: opacity 0.5s linear, margin-top 0.5s linear;
 }
- 
-.social-icons {
-    margin-top: 20px;
+.loading h1, .loading h2 {
+  margin-top: 0px;
+  opacity: 0;  
 }
- 
-.social-icons img {
-    width: 35px; /* Adjust the size as needed */
-    height: 35px;
-    margin: 0px;
+.gears {
+  position: relative;
+  margin: 0 auto;
+  width: auto; height: 0;
 }
- 
-.social-icons a {
-    display: inline-block;
-    margin: 0 7px 0 0;
-    color: #fff; /* White */
-    font-size: 24px;
+.gear {
+  position: relative;
+  z-index: 0;
+  width: 120px; height: 120px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: var(--stroke-color);
 }
- 
-.social-icons a:hover {
-    color: #007bff;
+.gear:before{
+  position: absolute; left: 5px; top: 5px; right: 5px; bottom: 5px;
+  z-index: 2;
+  content: "";
+  border-radius: 50%;
+  background: var(--main-color);
+}
+.gear:after {
+  position: absolute; left: 25px; top: 25px;
+  z-index: 3;
+  content: "";
+  width: 70px; height: 70px;
+  border-radius: 50%;
+  border: 5px solid var(--stroke-color);
+  box-sizing: border-box;
+  background: var(--main-color);
+}
+.gear.one {
+  left: -130px;
+}
+.gear.two {
+  top: -75px;
+}
+.gear.three {
+  top: -235px;
+  left: 130px;
+}
+.gear .bar {
+  position: absolute; left: -15px; top: 50%;
+  z-index: 0;
+  width: 150px; height: 30px;
+  margin-top: -15px;
+  border-radius: 5px;
+  background: var(--stroke-color);
+}
+.gear .bar:before {
+  position: absolute; left: 5px; top: 5px; right: 5px; bottom: 5px;
+  z-index: 1;
+  content: "";
+  border-radius: 2px;
+  background: var(--main-color);
+}
+.gear .bar:nth-child(2) {
+  transform: rotate(60deg);
+  -webkit-transform: rotate(60deg);
+}
+.gear .bar:nth-child(3) {
+  transform: rotate(120deg);
+  -webkit-transform: rotate(120deg);
+}
+@-webkit-keyframes clockwise {
+  0% { -webkit-transform: rotate(0deg);}
+  100% { -webkit-transform: rotate(360deg);}
+}
+@-webkit-keyframes anticlockwise {
+  0% { -webkit-transform: rotate(360deg);}
+  100% { -webkit-transform: rotate(0deg);}
+}
+@-webkit-keyframes clockwiseError {
+  0% { -webkit-transform: rotate(0deg);}
+  20% { -webkit-transform: rotate(30deg);}
+  40% { -webkit-transform: rotate(25deg);}
+  60% { -webkit-transform: rotate(30deg);}
+  100% { -webkit-transform: rotate(0deg);}
+}
+@-webkit-keyframes anticlockwiseErrorStop {
+  0% { -webkit-transform: rotate(0deg);}
+  20% { -webkit-transform: rotate(-30deg);}
+  60% { -webkit-transform: rotate(-30deg);}
+  100% { -webkit-transform: rotate(0deg);}
+}
+@-webkit-keyframes anticlockwiseError {
+  0% { -webkit-transform: rotate(0deg);}
+  20% { -webkit-transform: rotate(-30deg);}
+  40% { -webkit-transform: rotate(-25deg);}
+  60% { -webkit-transform: rotate(-30deg);}
+  100% { -webkit-transform: rotate(0deg);}
+}
+.gear.one {
+  -webkit-animation: anticlockwiseErrorStop 2s linear infinite;
+}
+.gear.two {
+  -webkit-animation: anticlockwiseError 2s linear infinite;
+}
+.gear.three {
+  -webkit-animation: clockwiseError 2s linear infinite;
+}
+.loading .gear.one, .loading .gear.three {
+  -webkit-animation: clockwise 3s linear infinite;
+}
+.loading .gear.two {
+  -webkit-animation: anticlockwise 3s linear infinite;
 }
 </style>
-<body>
- 
-    <div class="unavailable-message">
-<h1>This website is currently unavailable.</h1>
-<p>Reach us at <a href="mailto:info@digital-nasional.com.my">info@digital-nasional.com.my</a></p>
-<p>Stay connected:</p>
-<div class="social-icons">
-<a href="https://www.linkedin.com/company/digital-nasional/" target="_blank"><img src="linkedin.png" alt="LinkedIn"></a>
-<a href="https://www.facebook.com/DigitalNasionalBerhad/" target="_blank"><img src="facebook.png" alt="Facebook"></a>   
-</div>
-</div>  
- 
-</body>
+<body class="loading">
+    <h1>This website is currently unavaible.</h1>
+    <h2>Reach us at <b><a href="mailto:info@digital-nasional.com.my">info@digital-nasional.com.my</a></b></h2>
+    <h2>Stay connected : 
+        <b>
+            <a href="https://www.linkedin.com/company/digital-nasional/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.facebook.com/DigitalNasionalBerhad/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        </b>
+    </h2>
+    <div class="gears">
+      <div class="gear one">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <div class="gear two">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <div class="gear three">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+        $(function() {
+            setTimeout(function(){
+                $('body').removeClass('loading');
+            }, 1000);
+        });
+    </script>
+  </body>
 </html>
